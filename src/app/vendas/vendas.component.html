@@ -1,0 +1,71 @@
+<body>
+<header>
+  <!-- Substitua 'url-do-seu-logo.png' pela URL da sua imagem de logo -->
+  <img src="../../assets/SPFC.png" alt="Logo da empresa" class="logo">
+  <nav>
+      <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Camisetas</a></li>
+          <li><a href="#">Contato</a></li>
+      </ul>
+  </nav>
+</header>
+<main>
+
+  <section class="product-list">
+  <h1>Ofertas Especiais!</h1>
+  <ul>
+    <li *ngFor="let oferta of OfertasEspeciais">
+      {{ oferta.produto }} - {{ oferta.detalhes }} - {{ oferta.preco }}
+    </li>
+    <img class="product-image" src="../../assets/camisa1.png" alt="Imagem do Produto">
+    <img class="product-image" src="../../assets/camisa3.png" alt="Imagem do Produto">
+  </ul>
+
+  <h2>Selecione o Ano</h2>
+  <select [(ngModel)]="MarcaSelecionada" (change)="updateListaModelo()">
+    <option value="">-- Selecione o Ano --</option>
+    <option *ngFor="let celular of celulares" [ngValue]="celular">
+      {{ celular.marca }}
+    </option>
+  </select>
+
+  <h2>Selecione o Modelo da Camisa</h2>
+  <select [(ngModel)]="ModeloSelecionado">
+    <option value="">-- Selecione o Modelo --</option>
+    <option *ngFor="let modelo of modelos" [ngValue]="modelo">
+      {{ modelo.nome }}
+    </option>
+  </select>
+
+  <div *ngIf="ModeloSelecionado">
+    <h3>Detalhes do Produto Selecionado:</h3>
+    <p>Marca: {{ MarcaSelecionada?.marca }}</p>
+    <p>Modelo: {{ ModeloSelecionado.nome }}</p>
+    <p>Preço: {{ ModeloSelecionado.preco }}</p>
+  </div>
+
+  <h2>Cadastre o Modelo desejado</h2>
+  <input
+    type="text"
+    [(ngModel)]="DesejoUsuario"
+    placeholder="Digite seu desejo..."
+  />
+  <button (click)="AdicionarDesejo()">Cadastrar</button>
+  <button (click)="LimparListaDesejo()">Limpar Campo</button>
+  <!-- Novo botão para limpar o campo -->
+
+  <h2>Lista de Desejos!</h2>
+  <ul>
+    <li *ngFor="let desejo of desejos">{{ desejo }}</li>
+  </ul>
+
+  <button (click)="LimparDesejos()">Limpar Lista de Desejos</button>
+  <!-- Novo botão para limpar a lista de desejos -->
+  </section>
+</main>
+  <footer>
+    <p>&copy; 2023 NeraStore</p>
+  </footer>
+
+</body>
